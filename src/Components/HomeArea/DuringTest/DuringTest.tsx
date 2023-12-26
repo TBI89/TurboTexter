@@ -1,21 +1,34 @@
+import { useEffect, useState } from "react";
 import "./DuringTest.css";
+import QuoteModel from "../../../Models/QuoteModel";
+import quoteService from "../../../Services/QuoteService";
+import notifyService from "../../../Services/NotifyService";
 
 function DuringTest(): JSX.Element {
+
+    const [quote, setQuote] = useState<QuoteModel>();
+
+    useEffect(() => {
+        quoteService.getRandomQuote()
+            .then(quote => setQuote(quote))
+            .catch(err => notifyService.error(err))
+    }, []);
+
     return (
         <div className="DuringTest">
 
             <div className="UserStats">
 
                 <div className="Timer">
-                    Timer
+                    Seconds: 0
                 </div>
 
                 <div className="CharsPerMin">
-                    CharsPerMin
+                    CPM
                 </div>
 
                 <div className="WordsPerMin">
-                    WordsPerMin
+                    WPM
                 </div>
 
                 <div className="Accuracy">
@@ -27,13 +40,12 @@ function DuringTest(): JSX.Element {
 
             <div className="UserInput">
 
-                <textarea placeholder="Here You Type Your Input">
-
-                </textarea>
-
-            </div>
+                <textarea value={quote?.content}>
+            </textarea>
 
         </div>
+
+        </div >
     );
 }
 

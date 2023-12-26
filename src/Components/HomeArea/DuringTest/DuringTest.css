@@ -1,3 +1,27 @@
-.DuringTest {
-	
+.DuringTest>.UserStats>.Timer,
+.DuringTest>.UserStats>.CharsPerMin,
+.DuringTest>.UserStats>.WordsPerMin,
+.DuringTest>.UserStats>.Accuracy {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    margin-top: 10px;
+    border: 1px solid;
+}
+
+.DuringTest>.UserInput>textarea {
+    width: 660px;
+    height: 300px;
+}
+
+@media (max-width: 915px) {
+
+    .DuringTest>.UserStats>.Timer,
+    .DuringTest>.UserStats>.CharsPerMin,
+    .DuringTest>.UserStats>.WordsPerMin,
+    .DuringTest>.UserStats>.Accuracy {
+        width: 75px;
+        height: 75px;
+    }
 }
