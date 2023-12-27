@@ -2,6 +2,7 @@ html, body, #root {
     height: 100%;
     text-align: center;
     overflow: hidden;
+    background-image: url(./Assets/Images/background-image.jpg);
 }
 
 a {

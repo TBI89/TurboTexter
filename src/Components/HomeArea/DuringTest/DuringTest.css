@@ -7,12 +7,24 @@
     height: 150px;
     margin: 10px;
     margin-top: 10px;
-    border: 1px solid;
+    border-radius: 10px;
+    background-color: rgba(50, 255, 50, 0.8);
+    font-family: "home-font";
+    font-weight: 600;
+    font-size: 30px;
 }
 
-.DuringTest>.UserInput>textarea {
-    width: 660px;
-    height: 300px;
+.DuringTest>.UserInput {
+    margin: auto;
+    width: 900px;
+    height: 150px;
+    border: none;
+    background-color: rgba(50, 255, 50, 0.8);
+    border-radius: 10px;
+    font-family: "home-font";
+    font-size: larger;
+    text-align: start;
+    padding: 5px 20px 5px 20px;
 }
 
 @media (max-width: 915px) {
@@ -21,7 +33,20 @@
     .DuringTest>.UserStats>.CharsPerMin,
     .DuringTest>.UserStats>.WordsPerMin,
     .DuringTest>.UserStats>.Accuracy {
-        width: 75px;
-        height: 75px;
+        width: 80px;
+        height: 80px;
+        font-size: medium;
     }
+
+    .DuringTest>.UserInput {
+        width: 370px;
+        height: 130px;  
+        font-size: medium;
+    }
+}
+
+@media (min-width: 915px) and (max-height: 725px) {
+    .DuringTest>.UserInput {
+        height: 110px; 
+    } 
 }

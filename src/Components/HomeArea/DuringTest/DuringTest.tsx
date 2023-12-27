@@ -7,6 +7,10 @@ import notifyService from "../../../Services/NotifyService";
 function DuringTest(): JSX.Element {
 
     const [quote, setQuote] = useState<QuoteModel>();
+    const [testTimer, setTestTimer] = useState(null);
+    const [charsPerMin, setCharsPerMin] = useState(null);
+    const [wordsPerMin, setWordsPerMin] = useState(null);
+    const [accuracy, setAccuracy] = useState(null);
 
     useEffect(() => {
         quoteService.getRandomQuote()
@@ -20,30 +24,31 @@ function DuringTest(): JSX.Element {
             <div className="UserStats">
 
                 <div className="Timer">
-                    Seconds: 0
+                    Seconds<br />
+                    <span className="TimerValue">{testTimer}</span>
                 </div>
 
                 <div className="CharsPerMin">
-                    CPM
+                    CPM<br />
+                    <span className="CharsValue">{charsPerMin}</span>
                 </div>
 
                 <div className="WordsPerMin">
-                    WPM
+                    WPM<br />
+                    <span className="WordsValue">{wordsPerMin}</span>
                 </div>
 
                 <div className="Accuracy">
-                    Accuracy
+                    Accuracy<br />
+                    <span className="AccuracyValue">{accuracy}</span>
                 </div>
 
             </div>
             <br />
 
             <div className="UserInput">
-
-                <textarea value={quote?.content}>
-            </textarea>
-
-        </div>
+                <span>{quote?.content}</span>
+            </div>
 
         </div >
     );
