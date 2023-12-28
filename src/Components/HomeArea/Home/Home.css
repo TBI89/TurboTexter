@@ -34,3 +34,11 @@
     background-color: rgba(50, 50, 200, 0.8);
     transform: scale(1.1);
 }
+
+.Home>.PreTestSection>form>.FormValidationError {
+    color: red;
+}
+
+.Home>.PreTestSection>form>.ErrorBorder {
+    border: 2px solid red;
+}
