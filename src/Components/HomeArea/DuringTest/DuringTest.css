@@ -21,6 +21,7 @@
 
 .DuringTest>.UserInput>div {
     display: inline-block;
+    padding-left: 10px;
     width: 700px;
     height: 100px;
     background-color: rgba(50, 255, 50, 0.8);

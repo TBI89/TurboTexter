@@ -30,7 +30,36 @@ function DuringTest({ selectedTestDuration }: { selectedTestDuration: number | n
     }, [selectedTestDuration]);
 
     function handleUserInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        setUserInput(event.target.value);
+
+        const userInputValue = event.target.value;
+        setUserInput(userInputValue);
+
+        const charCount = userInputValue.length;
+        setCharsPerMin(charCount);
+
+        const wordCount = userInputValue.split(/\s+/).filter(word => word !== "").length;
+        setWordsPerMin(wordCount);
+
+        calculateAccuracy(userInputValue);
+    }
+
+    function calculateAccuracy(userInputValue: string) {
+        if (quote?.content) {
+            const quoteChars = quote.content.replace(/\s/g, '');
+            const userChars = userInputValue.replace(/\s/g, '');
+
+            let correctChars = 0;
+            for (let i = 0; i < Math.min(quoteChars.length, userChars.length); i++) {
+                if (quoteChars[i] === userChars[i]) {
+                    correctChars++;
+                }
+            }
+
+            const accuracyPercentage = (correctChars / quoteChars.length) * 100;
+            setAccuracy(accuracyPercentage);
+        } else {
+            setAccuracy(null);
+        }
     }
 
     return (
@@ -55,7 +84,7 @@ function DuringTest({ selectedTestDuration }: { selectedTestDuration: number | n
 
                 <div className="Accuracy">
                     Accuracy<br />
-                    <span className="AccuracyValue">{accuracy}</span>
+                    <span className="AccuracyValue">{accuracy !== null ? accuracy.toFixed(1) + '%' : ''}</span>
                 </div>
 
             </div>

@@ -5,7 +5,7 @@ function PostTest(): JSX.Element {
         <div className="PostTest">
             <h2>Test Result</h2>
             <p>Personal Feedback</p>
-            <a>Share Links</a>
+            <a href="*">Share Links</a>
             <br />
             <button>Try Again!</button>
         </div>

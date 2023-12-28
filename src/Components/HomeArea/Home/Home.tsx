@@ -1,21 +1,20 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import timerService from '../../../Services/TimerService';
 import DuringTest from '../DuringTest/DuringTest';
 import './Home.css';
-import { useState } from 'react';
-
-interface FormData {
-    timerDuration: number;
-}
+import TestModel from '../../../Models/TestModel';
 
 function Home(): JSX.Element {
-    const { handleSubmit, setValue } = useForm<FormData>();
+    const { handleSubmit, setValue, register, formState: { errors } } = useForm<TestModel>();
     const [selectedTestDuration, setSelectedTestDuration] = useState<number>(null);
 
-    function submit(data: FormData) {
+    function submit(data: TestModel) {
         timerService.setTestTimer(data.timerDuration);
         setSelectedTestDuration(data.timerDuration);
     }
+
+    console.log({ errors });
 
     return (
         <div className="Home">
@@ -23,10 +22,11 @@ function Home(): JSX.Element {
                 <form onSubmit={handleSubmit(submit)}>
                     <select
                         className="form-select"
+                        {...register("timerDuration", TestModel.timerDurationValidation)}
                         name="timerDuration"
                         onChange={e => setValue('timerDuration', parseInt(e.target.value, 10))}
                     >
-                        <option value={0}>Test Duration</option>
+                        <option value={""}>Test Duration</option>
                         <option value={30}>30 Seconds</option>
                         <option value={60}>60 Seconds</option>
                         <option value={90}>90 Seconds</option>
@@ -34,7 +34,11 @@ function Home(): JSX.Element {
                     </select>
                     <br />
 
-                    <select className="form-select" name="difficultyLevel">
+                    <select
+                        className="form-select"
+                        name="difficultyLevel"
+                        {...register("difficultyLevel", TestModel.difficultyLevelValidation)}
+                    >
                         <option value={1}>Difficulty Level</option>
                         <option value={2}>Easy</option>
                         <option value={3}>Medium</option>
