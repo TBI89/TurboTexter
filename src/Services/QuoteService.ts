@@ -12,5 +12,5 @@ class QuoteService {
     }
 }
 
-const quoteService = new QuoteService; // Singleton design pattern.
+const quoteService = new QuoteService(); // Singleton design pattern.
 export default quoteService;

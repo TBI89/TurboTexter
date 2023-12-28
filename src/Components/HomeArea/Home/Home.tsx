@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import timerService from '../../../Services/TimerService';
 import DuringTest from '../DuringTest/DuringTest';
 import './Home.css';
+import { useState } from 'react';
 
 interface FormData {
     timerDuration: number;
@@ -9,9 +10,11 @@ interface FormData {
 
 function Home(): JSX.Element {
     const { handleSubmit, setValue } = useForm<FormData>();
+    const [selectedTestDuration, setSelectedTestDuration] = useState<number>(null);
 
     function submit(data: FormData) {
         timerService.setTestTimer(data.timerDuration);
+        setSelectedTestDuration(data.timerDuration);
     }
 
     return (
@@ -47,7 +50,7 @@ function Home(): JSX.Element {
             </div>
 
             <div className="DuringTestSection">
-                <DuringTest />
+                <DuringTest selectedTestDuration={selectedTestDuration} />
             </div>
         </div>
     );

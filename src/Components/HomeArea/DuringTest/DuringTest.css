@@ -1,3 +1,8 @@
+.DuringTest>.UserStats {
+    display: flex;
+    justify-content: center;
+}
+
 .DuringTest>.UserStats>.Timer,
 .DuringTest>.UserStats>.CharsPerMin,
 .DuringTest>.UserStats>.WordsPerMin,
@@ -14,17 +19,27 @@
     font-size: 30px;
 }
 
-.DuringTest>.UserInput {
-    margin: auto;
-    width: 900px;
-    height: 150px;
-    border: none;
+.DuringTest>.UserInput>div {
+    display: inline-block;
+    width: 700px;
+    height: 100px;
     background-color: rgba(50, 255, 50, 0.8);
     border-radius: 10px;
     font-family: "home-font";
     font-size: larger;
     text-align: start;
-    padding: 5px 20px 5px 20px;
+    overflow: auto;
+}
+
+.DuringTest>.UserInput>input {
+    width: 700px;
+    height: 100px;
+    background-color: rgba(50, 255, 50, 0.8);
+    border-radius: 10px;
+    font-family: "home-font";
+    font-size: larger;
+    text-align: start;
+    overflow: auto;
 }
 
 @media (max-width: 915px) {
@@ -39,14 +54,38 @@
     }
 
     .DuringTest>.UserInput {
-        width: 370px;
-        height: 130px;  
-        font-size: medium;
+        font-size: small;
+    }
+
+    .DuringTest>.UserInput>div {
+        width: 380px;
+        height: 50px;
+    }
+
+    .DuringTest>.UserInput>input {
+        width: 380px;
+        height: 50px;
     }
 }
 
 @media (min-width: 915px) and (max-height: 725px) {
-    .DuringTest>.UserInput {
-        height: 110px; 
-    } 
+
+    .DuringTest>.UserInput>div {
+        width: 480px;
+        height: 70px;
+    }
+
+    .DuringTest>.UserInput>input {
+        width: 480px;
+        height: 70px;
+    }
+
+    .DuringTest>.UserStats>.Timer,
+    .DuringTest>.UserStats>.CharsPerMin,
+    .DuringTest>.UserStats>.WordsPerMin,
+    .DuringTest>.UserStats>.Accuracy {
+        width: 100px;
+        height: 100px;
+        font-size: medium;
+    }
 }
