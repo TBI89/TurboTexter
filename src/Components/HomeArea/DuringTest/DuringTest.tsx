@@ -10,9 +10,9 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
 
     const [quote, setQuote] = useState<QuoteModel>();
     const [testTimer, setTestTimer] = useState(null);
-    const [charsPerMin, setCharsPerMin] = useState(null);
-    const [wordsPerMin, setWordsPerMin] = useState(null);
-    const [accuracy, setAccuracy] = useState(null);
+    const [charsPerMin, setCharsPerMin] = useState(0);
+    const [wordsPerMin, setWordsPerMin] = useState(0);
+    const [accuracy, setAccuracy] = useState(0);
     const [userInput, setUserInput] = useState<string>("");
     const navigate = useNavigate();
 
