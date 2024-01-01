@@ -4,8 +4,8 @@ import appConfig from "../Utils/AppConfig";
 
 class QuoteService {
 
-    public async getRandomQuote(): Promise<QuoteModel> {
-        const url = appConfig.randomQuoteUrl;
+    public async getRandomQuote(length: number = 0): Promise<QuoteModel> {
+        const url = appConfig.getRandomQuote(length);
         const response = await axios.get(url);
         const quote = response.data;
         return quote;

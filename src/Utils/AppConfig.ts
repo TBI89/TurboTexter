@@ -1,5 +1,9 @@
 class AppConfig {
-    public randomQuoteUrl = "https://api.quotable.io/random";
+    public baseUrl = "https://api.quotable.io/";
+    
+    public getRandomQuote(length: number): string {
+        return `${this.baseUrl}random?minLength=${length}`;
+    }
 }
 
 const appConfig = new AppConfig(); // Singleton

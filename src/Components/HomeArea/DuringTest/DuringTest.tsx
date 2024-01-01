@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import "./DuringTest.css";
+import { useNavigate } from "react-router-dom";
 import QuoteModel from "../../../Models/QuoteModel";
-import quoteService from "../../../Services/QuoteService";
 import notifyService from "../../../Services/NotifyService";
+import quoteService from "../../../Services/QuoteService";
+import "./DuringTest.css";
 
-function DuringTest({ selectedTestDuration }: { selectedTestDuration: number | null }): JSX.Element {
+function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
+    { selectedTestDuration: number | null, selectedDifficultyLevel: number | null }): JSX.Element {
 
     const [quote, setQuote] = useState<QuoteModel>();
     const [testTimer, setTestTimer] = useState(null);
@@ -12,25 +14,50 @@ function DuringTest({ selectedTestDuration }: { selectedTestDuration: number | n
     const [wordsPerMin, setWordsPerMin] = useState(null);
     const [accuracy, setAccuracy] = useState(null);
     const [userInput, setUserInput] = useState<string>("");
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        quoteService.getRandomQuote()
+    interface DifficultyLevelMap {
+        [key: number]: number;
+    }
+
+    const difficultyLevelMap: DifficultyLevelMap = {
+        1: 100,
+        2: 200,
+        3: 300,
+        4: 400
+    }
+
+    let quoteMinLength = difficultyLevelMap[selectedDifficultyLevel || 0];
+
+    function fetchNewQuote() {
+        quoteService.getRandomQuote(quoteMinLength)
             .then(quote => setQuote(quote))
             .catch(err => notifyService.error(err))
+    }
+
+    useEffect(() => {
+        fetchNewQuote();
 
         setTestTimer(selectedTestDuration);
 
         let timerInterval: NodeJS.Timeout;
         if (selectedTestDuration !== null && selectedTestDuration > 0) {
             timerInterval = setInterval(() => {
-                setTestTimer((prevTimer: number) => (prevTimer !== null && prevTimer > 0 ? prevTimer - 1 : 0))
+                setTestTimer((prevTimer: number) => (prevTimer !== null && prevTimer > 0 ? prevTimer - 1 : 0));
             }, 1000);
-            return () => clearInterval(timerInterval);
+            return () => {
+                clearInterval(timerInterval);
+            };
         }
-    }, [selectedTestDuration]);
+    }, [selectedTestDuration, selectedDifficultyLevel]);
+
+    useEffect(() => {
+        if (testTimer === 0) {
+            navigate("/dialog", {state: {charsPerMin, wordsPerMin, accuracy}});
+        }
+    }, [testTimer, navigate, charsPerMin, wordsPerMin, accuracy]);
 
     function handleUserInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-
         const userInputValue = event.target.value;
         setUserInput(userInputValue);
 
@@ -45,6 +72,7 @@ function DuringTest({ selectedTestDuration }: { selectedTestDuration: number | n
 
     function calculateAccuracy(userInputValue: string) {
         if (quote?.content) {
+
             const quoteChars = quote.content.replace(/\s/g, '');
             const userChars = userInputValue.replace(/\s/g, '');
 
@@ -57,11 +85,16 @@ function DuringTest({ selectedTestDuration }: { selectedTestDuration: number | n
 
             const accuracyPercentage = (correctChars / quoteChars.length) * 100;
             setAccuracy(accuracyPercentage);
+
+            if (accuracyPercentage === 100) {
+                fetchNewQuote();
+            }
+
         } else {
             setAccuracy(null);
         }
     }
-
+    
     return (
         <div className="DuringTest">
 

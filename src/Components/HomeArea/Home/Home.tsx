@@ -7,13 +7,16 @@ import TestModel from '../../../Models/TestModel';
 import ErrorIcon from '@mui/icons-material/Error';
 
 function Home(): JSX.Element {
-    const { handleSubmit, setValue, register, formState: { errors } } = useForm<TestModel>();
+    const { handleSubmit, setValue, register, formState: { errors, isValid } } = useForm<TestModel>();
     const [selectedTestDuration, setSelectedTestDuration] = useState<number>(null);
+    const [selectedDifficultyLevel, setSelectedDifficultyLevel] = useState<number>(1);
+    const [isTestStarted, setIsTestStarted] = useState(false);
 
     function submit(data: TestModel) {
         timerService.setTestTimer(data.timerDuration);
         setSelectedTestDuration(data.timerDuration);
-        console.log("Submitted");
+        setSelectedDifficultyLevel(data.difficultyLevel);
+        setIsTestStarted(true);
     }
 
     return (
@@ -54,15 +57,21 @@ function Home(): JSX.Element {
                     </span>
                     <br />
 
-                    <button type="submit" className="btn btn-success">
+                    <button disabled={!isValid} className="btn btn-success">
                         Begin Test!
                     </button>
                 </form>
             </div>
 
-            <div className="DuringTestSection">
-                <DuringTest selectedTestDuration={selectedTestDuration} />
-            </div>
+            {isTestStarted && (
+                <div className="DuringTestSection">
+                    <DuringTest
+                        selectedTestDuration={selectedTestDuration}
+                        selectedDifficultyLevel={selectedDifficultyLevel}
+                    />
+                </div>
+            )}
+
         </div>
     );
 }

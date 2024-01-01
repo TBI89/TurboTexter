@@ -10,7 +10,6 @@
     cursor: pointer;
     font-family: "home-font";
     font-weight: 600;
-    transition: ease-in-out 0.4s;
 }
 
 .Home>.PreTestSection>form>.form-select:hover {

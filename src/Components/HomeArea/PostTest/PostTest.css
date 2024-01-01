@@ -1,3 +1,32 @@
-.PostTest {
-	
+@font-face {
+    font-family: "post-test-font";
+    src: url(../../../Assets/Fonts/post-test-font.ttf);
+}
+
+.PostTest>* {
+    font-family: "post-test-font";
+}
+
+.PostTest>h2 {
+    font-size: 50px;
+}
+
+.PostTest>p {
+    font-size: x-large;
+}
+
+.PostTest>button {
+    font-size: large;
+    border-radius: 10px;
+    background-color: rgba(50, 255, 50, 0.8);
+    transition: ease-in-out 0.3s;
+}
+
+.PostTest>button:hover {
+    background-color: rgba(50, 50, 200, 0.8);
+    transform: scale(1.1);
+}
+
+.PostTest>img {
+    width: 250px;
 }
