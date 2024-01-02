@@ -24,6 +24,7 @@ function Home(): JSX.Element {
             <div className="PreTestSection">
                 <form onSubmit={handleSubmit(submit)}>
                     <select
+                        disabled={isValid}
                         className={`form-select ${errors.timerDuration ? 'ErrorBorder' : ''}`}
                         {...register("timerDuration", TestModel.timerDurationValidation)}
                         name="timerDuration"
@@ -41,6 +42,7 @@ function Home(): JSX.Element {
                     <br />
 
                     <select
+                        disabled={isValid}
                         className={`form-select ${errors.difficultyLevel ? 'ErrorBorder' : ''}`}
                         {...register("difficultyLevel", TestModel.difficultyLevelValidation)}
                         name="difficultyLevel"

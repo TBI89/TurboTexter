@@ -35,3 +35,35 @@
 .PostTest>img {
     width: 250px;
 }
+
+@media(max-width: 568px) {
+
+    .PostTest>h2 {
+        font-size: 30px;
+    }
+
+    .PostTest>p {
+        font-size: medium;
+    }
+
+    .PostTest>img {
+        width: 200px;
+    }
+
+}
+
+@media(max-width: 768px) {
+
+    .PostTest>h2 {
+        font-size: 40px;
+    }
+
+    .PostTest>p {
+        font-size: large;
+    }
+
+    .PostTest>img {
+        width: 220px;
+    }
+
+}

@@ -5,6 +5,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import firstFeedbackImage from "../../../Assets/Images/first-feedback-image.jpg";
 import secondFeedbackImage from "../../../Assets/Images/second-feedback-image.png";
 import thirdFeedbackImage from "../../../Assets/Images/third-feedback-image.png";
+import defaultImageFeedback from "../../../Assets/Images/default-feedback-image.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
 
@@ -23,22 +24,30 @@ function PostTest(): JSX.Element {
     let personalImage: string;
     let personalFeedback: string;
 
-    if (charsPerMin > 120 && accuracy > 85) {
-        personalTitle = "You Are The Flash!";
-        personalImage = firstFeedbackImage;
-        personalFeedback = `Zooming at the speed of light! You typed with the velocity of ${wordsPerMin} WPM (${charsPerMin} CPM) and achieved an accuracy of ${accuracy.toFixed(1)}%. Impressive, just like The Flash! ⚡`
-    }
+    switch (true) {
+        case (charsPerMin > 120 && accuracy > 85):
+            personalTitle = "You Are The Flash!";
+            personalImage = firstFeedbackImage;
+            personalFeedback = `Zooming at the speed of light! You typed with the velocity of ${wordsPerMin} WPM (${charsPerMin} CPM) and achieved an accuracy of ${accuracy.toFixed(1)}%. Impressive, just like The Flash! ⚡`;
+            break;
 
-    if (charsPerMin < 120 && charsPerMin > 90 && accuracy < 85 && accuracy > 60) {
-        personalTitle = "You Are Spiderman!";
-        personalImage = secondFeedbackImage;
-        personalFeedback = `Swinging through your typing! At a moderate pace, you reached ${wordsPerMin} WPM (300 ${charsPerMin}) with an accuracy of ${accuracy.toFixed(1)}%. Keep up the agility, just like Spider-Man! 🕷️`
-    }
+        case (charsPerMin < 120 && charsPerMin > 90 && accuracy < 85 && accuracy > 60):
+            personalTitle = "You Are Spiderman!";
+            personalImage = secondFeedbackImage;
+            personalFeedback = `Swinging through your typing! At a moderate pace, you reached ${wordsPerMin} WPM (300 ${charsPerMin}) with an accuracy of ${accuracy.toFixed(1)}%. Keep up the agility, just like Spider-Man! 🕷️`;
+            break;
 
-    if (charsPerMin < 90 && accuracy < 60) {
-        personalTitle = "You Are The Hulk!";
-        personalImage = thirdFeedbackImage;
-        personalFeedback = `Channeling your inner Hulk – slow and powerful! You typed at ${wordsPerMin} WPM (${charsPerMin} CPM) with an accuracy of ${accuracy.toFixed(1)}%. Take your time to smash those keys! 💪🏽`
+        case (charsPerMin < 90 && accuracy < 60):
+            personalTitle = "You Are The Hulk!";
+            personalImage = thirdFeedbackImage;
+            personalFeedback = `Channeling your inner Hulk – slow and powerful! You typed at ${wordsPerMin} WPM (${charsPerMin} CPM) with an accuracy of ${accuracy.toFixed(1)}%. Take your time to smash those keys! 💪🏽`;
+            break;
+
+        default:
+            personalTitle = "You Are Batman!";
+            personalImage = defaultImageFeedback;
+            personalFeedback = `Silent, vigilant, and precise – just like Batman! Your typing skills are unique, and your accuracy (${accuracy.toFixed(1)}%) and speed (${wordsPerMin} WPM, ${charsPerMin} CPM) don't fit the typical profiles. Embrace your inner Dark Knight! 🦇`;
+            break;
     }
 
     function shareOnFacebook() {
