@@ -71,14 +71,16 @@ function PostTest(): JSX.Element {
             <img src={personalImage} />
             <p>{personalFeedback}</p>
 
-            <div className="LinkContainer">
-                <button onClick={shareOnFacebook}><FacebookIcon fontSize="large" htmlColor="blue" /></button>
-                <button onClick={shareOnLinkedIn}><LinkedInIcon fontSize="large" htmlColor="#0A66C2" /></button>
-                <button onClick={shareOnWhatsApp}><WhatsAppIcon fontSize="large" htmlColor="lightGreen" /></button>
+            <div className="ActionButtonsContainer">
+                <div className="LinkContainer">
+                    <button onClick={shareOnFacebook}><FacebookIcon fontSize="large" htmlColor="blue" /></button>
+                    <button onClick={shareOnLinkedIn}><LinkedInIcon fontSize="large" htmlColor="#0A66C2" /></button>
+                    <button onClick={shareOnWhatsApp}><WhatsAppIcon fontSize="large" htmlColor="lightGreen" /></button>
+                </div>
+                <br />
+                <button onClick={() => navigate("/home")} className="btn">Try Again!</button>
             </div>
 
-            <br />
-            <button onClick={() => navigate("/home")} className="btn">Try Again!</button>
         </div>
     );
 }
