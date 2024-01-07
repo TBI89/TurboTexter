@@ -1,3 +1,10 @@
-.PageNotFound {
-	
+.PageNotFound>img {
+    width: 700px;
+}
+
+@media(max-width: 652px) {
+    .PageNotFound>img {
+        width: 400px;
+        margin-top: 60px;
+    }
 }

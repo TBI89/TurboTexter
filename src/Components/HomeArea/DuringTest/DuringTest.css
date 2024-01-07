@@ -43,6 +43,15 @@
     overflow: auto;
 }
 
+.UserInput span.correct {
+    color: blue;
+    font-weight: 500;
+}
+
+.UserInput span.incorrect {
+    color: gray;
+}
+
 @media (max-width: 915px) {
 
     .DuringTest>.UserStats>.Timer,

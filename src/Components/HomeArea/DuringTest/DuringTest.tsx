@@ -14,6 +14,7 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
     const [wordsPerMin, setWordsPerMin] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [userInput, setUserInput] = useState<string>("");
+    const [correctlyTypedChars, setCorrectlyTypedChars] = useState<string>("");
     const navigate = useNavigate();
 
     interface DifficultyLevelMap {
@@ -53,7 +54,7 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
 
     useEffect(() => {
         if (testTimer === 0) {
-            navigate("/dialog", {state: {charsPerMin, wordsPerMin, accuracy}});
+            navigate("/dialog", { state: { charsPerMin, wordsPerMin, accuracy } });
         }
     }, [testTimer, navigate, charsPerMin, wordsPerMin, accuracy]);
 
@@ -68,6 +69,8 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
         setWordsPerMin(wordCount);
 
         calculateAccuracy(userInputValue);
+
+        setCorrectlyTypedChars(userInputValue.slice(0, charsPerMin));
     }
 
     function calculateAccuracy(userInputValue: string) {
@@ -94,7 +97,7 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
             setAccuracy(null);
         }
     }
-    
+
     return (
         <div className="DuringTest">
 
@@ -124,14 +127,25 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
             <br />
 
             <div className="UserInput">
-                <div>{quote?.content}</div>
-                <br />
-                <input
-                    type="text"
-                    value={userInput}
-                    onChange={handleUserInputChange}
-                />
-            </div>
+        <div>
+          {quote?.content?.split("").map((char, index) => (
+            <span
+              key={index}
+              className={
+                correctlyTypedChars[index] === char ? "correct" : "incorrect"
+              }
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+        <br />
+        <input
+          type="text"
+          value={userInput}
+          onChange={handleUserInputChange}
+        />
+      </div>
 
         </div >
     );
