@@ -127,25 +127,24 @@ function DuringTest({ selectedTestDuration, selectedDifficultyLevel }:
             <br />
 
             <div className="UserInput">
-        <div>
-          {quote?.content?.split("").map((char, index) => (
-            <span
-              key={index}
-              className={
-                correctlyTypedChars[index] === char ? "correct" : "incorrect"
-              }
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-        <br />
-        <input
-          type="text"
-          value={userInput}
-          onChange={handleUserInputChange}
-        />
-      </div>
+                <div>
+                    {quote?.content?.split("").map((char, index) => (
+                        <span
+                            key={index}
+                            className={
+                                correctlyTypedChars[index] === char ? "correct" : "incorrect"}
+                        >
+                            {char}
+                        </span>
+                    ))}
+                </div>
+                <br />
+                <input
+                    type="text"
+                    value={userInput}
+                    onChange={handleUserInputChange}
+                />
+            </div>
 
         </div >
     );

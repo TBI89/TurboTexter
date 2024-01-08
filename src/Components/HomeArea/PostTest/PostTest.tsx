@@ -8,6 +8,7 @@ import thirdFeedbackImage from "../../../Assets/Images/third-feedback-image.png"
 import defaultImageFeedback from "../../../Assets/Images/default-feedback-image.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
+import useTitle from "../../../Utils/UseTitle";
 
 function PostTest(): JSX.Element {
 
@@ -15,6 +16,8 @@ function PostTest(): JSX.Element {
     const navigate = useNavigate();
     const { charsPerMin, wordsPerMin, accuracy } = location.state || {};
     const currentUrl = window.location.href;
+
+    useTitle("TurboTexter | Result");
 
     if (typeof charsPerMin !== "number" || typeof wordsPerMin !== "number" || typeof accuracy !== "number") {
         notifyService.error("Error displaying your result \n Please try again.");

@@ -5,12 +5,15 @@ import DuringTest from '../DuringTest/DuringTest';
 import './Home.css';
 import TestModel from '../../../Models/TestModel';
 import ErrorIcon from '@mui/icons-material/Error';
+import useTitle from '../../../Utils/UseTitle';
 
 function Home(): JSX.Element {
     const { handleSubmit, setValue, register, formState: { errors, isValid } } = useForm<TestModel>();
     const [selectedTestDuration, setSelectedTestDuration] = useState<number>(null);
     const [selectedDifficultyLevel, setSelectedDifficultyLevel] = useState<number>(1);
     const [isTestStarted, setIsTestStarted] = useState(false);
+
+    useTitle("TurboTexter | Home");
 
     function submit(data: TestModel) {
         timerService.setTestTimer(data.timerDuration);
